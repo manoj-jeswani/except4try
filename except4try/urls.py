@@ -22,6 +22,8 @@ urlpatterns = [
 
     url(r'^admin/', admin.site.urls),
     url(r'', include('home.urls',namespace='home')),
-    url(r'', include('users.urls',namespace='users')),
+    url(r'^user/', include('users.urls',namespace='users')),
+    url(r'^qa/', include('qa.urls',namespace='qa')),
+     
    
 ]

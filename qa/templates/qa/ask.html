@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title%}
+Ask
+{% endblock %}
+{% block css %} 
+{% endblock %}
+
+{% block content %} 
+<div class="container">
+<h2>What's your query ?</h2>
+<hr>
+<hr>
+
+
+
+
+<form action="." method="post" class="uniForm">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" value="Submit" class="btn btn-success">
+</form>
+
+<blockquote>Note: To select multiple tags : hold Ctrl and tap on tags </blockquote>            
+
+         </div>
+
+
+ 
+
+
+
+
+
+
+{% endblock %}
+
+
+{% block include_scripts %}
+
+
+
+{% endblock %}
+
