@@ -34,9 +34,15 @@
                             <li><a href="#">Questions</a></li>
                             <li><a href="#">Tags</a></li>
                            <li><a href="#">Users</a></li>
-                           <li><a href="#">Login</a></li>
-                           <li><a href="#">Signup</a></li>
+                           {% if request.user.is_authenticated %}
                            
+                            <li><a href="#">Profile</a></li>
+                           <li><a href="{% url 'users:logout' %}">Logout</a></li>
+                          
+                           {% else %}
+                           <li><a href="{% url 'users:login' %}">Login</a></li>
+                           <li><a href="{% url 'users:register' %}">Signup</a></li>
+                           {% endif %}
                            
                              
                            

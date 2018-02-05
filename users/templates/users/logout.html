@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title%}
+Logout|{{ block.super }}
+{% endblock %}
+{% block css %} 
+{% endblock %}
+
+{% block content %} 
+<div class="container">
+<h2>Logged out</h2>
+<hr>
+<hr>
+
+<div class="logout">
+        <p>You have successfully logged out. <a href="{% url 'users:login' %}">Click</a> to login again.</p>
+</div>
+
+            
+
+         </div>
+
+
+ 
+
+
+
+
+
+
+{% endblock %}
+
+
+{% block include_scripts %}
+
+
+
+{% endblock %}
+
+
+

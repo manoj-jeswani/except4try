@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title%}
+SignUp|{{ block.super }}
+{% endblock %}
+{% block css %} 
+{% endblock %}
+
+{% block content %} 
+<div class="container">
+<h2>Sign in</h2>
+<hr>
+<hr>
+
+
+    <div class="login">
+
+        <form method="post" action="">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+                <tr>
+                    <td>&nbsp;</td>
+                    <td><input type="submit" value="Submit"></td>
+                <td><input type="hidden" name="next" value="/"></td>
+                </tr>                
+            </table>
+
+        </form>
+
+    </div>
+
+            <br>
+            Not having an account!<br> Sign up <a href="{% url 'users:register' %}">here</a>.
+            <br/>
+              
+            
+
+         </div>
+
+
+ 
+
+
+
+
+
+
+{% endblock %}
+
+
+{% block include_scripts %}
+
+
+
+{% endblock %}
+
+
+

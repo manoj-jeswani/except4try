@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title%}
+SignUp|{{ block.super }}
+{% endblock %}
+{% block css %} 
+{% endblock %}
+
+{% block content %} 
+<div class="container">
+<h2>Signup</h2>
+<hr>
+<hr>
+
+
+
+
+<form action="." method="post" class="uniForm">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" value="Submit" class="btn btn-success">
+</form>
+
+            <br>
+            Already having an account!<br> Sign in <a href="{% url 'users:login' %}">here</a>.
+            <br/>
+              
+            
+
+         </div>
+
+
+ 
+
+
+
+
+
+
+{% endblock %}
+
+
+{% block include_scripts %}
+
+
+
+{% endblock %}
+
