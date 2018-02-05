@@ -1,0 +1,84 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <title>except4try: {%block title%} {%endblock%}</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        
+        {% block include_css %}
+
+        {% endblock %}
+
+        <link href="{% static 'home/css/bootstrap.min.css' %}" rel="stylesheet">
+       
+    </head>
+    <style type="text/css" media="screen">
+        @font-face {
+            font-family: Font;
+            src: url({% static 'home/fonts/Roboto-Regular.ttf' %});
+        }
+            }        
+    </style>
+    <body style="font-family: Font; padding-top: 40px; padding-bottom: 40px;" background="{% static 'home/img/bg.jpg' %}" style="background-repeat: no-repeat; background-attachment: fixed; background-position: center;">
+     <!-- navbar-fixed-top -->
+                    <nav class="navbar navbar-default navbar-fixed-top">
+                        <div class="container-fluid">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="/">except4try</a>
+                        </div>
+                        <ul class="nav navbar-nav">
+                            <li><a href="#">Questions</a></li>
+                            <li><a href="#">Tags</a></li>
+                           <li><a href="#">Users</a></li>
+                           <li><a href="#">Login</a></li>
+                           <li><a href="#">Signup</a></li>
+                           
+                           
+                             
+                           
+                    </ul>
+                </div>
+                </nav>
+
+
+        {% block content %}
+
+        <!-- Write Code -->
+
+        {% endblock %}
+        <br/>
+ <!-- navbar-fixed-bottom -->
+ <br/>
+        <div align="center">
+        <footer class="footer navbar-fixed-bottom" style="background-color: white; display: inline-block; margin-top: 100%">
+            <div class="container">
+               <p class="text-muted" align="center"> Brought to you by <a href="https://www.linkedin.com/in/manoj-jeswani">except4try::Manoj</a>
+                <br/>
+                Give <a href="#">feedback.</a></p>
+            </div>
+         </footer>
+         </div>
+         <script src="{% static 'home/js/jquery-1.11.3.min.js' %}"></script>
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="{% static 'home/js/scripts.js' %}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="{% static 'home/js/location.js' %}"></script>
+        <script>
+            {% block location %}
+                
+            {% endblock %}
+        </script>
+
+    
+    {% block includes %}
+
+
+
+    {% endblock %}
+
+    </body>
+</html>
