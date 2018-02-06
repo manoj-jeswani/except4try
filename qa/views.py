@@ -1,9 +1,11 @@
 from django.http import Http404,HttpResponse
 from django.shortcuts import render, redirect,get_object_or_404
-from .forms import AskForm
+from .forms import AskForm,AnsForm
 from .models import Question,Answer
 from users.models import Euser
 from django.views.decorators.csrf import csrf_exempt
+from django.urls import reverse
+
 
 import json
 
@@ -24,14 +26,41 @@ def askView(request):
 			obj.user=uobj
 			obj.save()
 			obj.tag_list.set(form.cleaned_data['tag_list'])
-			
-			return redirect("/")
+			return redirect(reverse('qa:questions'))
 
 	else:
 		form = AskForm()
 
 
 	return render(request, "qa/ask.html",{"form" : form,})
+
+def ansView(request,id=None):
+	if not request.user.is_authenticated:
+		return redirect('users:login')
+
+
+	if request.method == 'POST':
+		form = AnsForm(request.POST)
+		if form.is_valid():
+			print('form validated successfully')
+			obj=form.save(commit=False)
+			print(request.user.username)
+			uobj=Euser.objects.get(username=str(request.user.username))
+			obj.user=uobj
+			obj.save()
+			qobj=get_object_or_404(Question,id=id)
+			qobj.ans_list.add(obj)
+			return redirect(reverse('qa:qdetail', args=[id]))
+
+
+	else:
+		form = AnsForm()
+
+
+	return render(request, "qa/ans.html",{"form" : form,})
+
+
+
 
 
 

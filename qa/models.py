@@ -12,6 +12,8 @@ class Category(models.Model):
 	def __str__(self):
 		return self.tag
 
+	def get_absolute_url(self):
+		return reverse("home:tag_detail",kwargs={"id":self.id})
 
 
 
@@ -29,6 +31,8 @@ class Answer(Qabase):
 
 	class Meta:
 		verbose_name = 'Answer'
+		ordering=['-timestamp']
+
 
 	def __str__(self):
 		return self.user.username + " : " + self.detail
