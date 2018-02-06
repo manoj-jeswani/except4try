@@ -31,7 +31,7 @@
                             <a class="navbar-brand" href="/">except4try</a>
                         </div>
                         <ul class="nav navbar-nav">
-                            <li><a href="#">Questions</a></li>
+                            <li><a href="{% url 'qa:questions' %}">Questions</a></li>
                             <li><a href="#">Tags</a></li>
                            <li><a href="#">Users</a></li>
                            {% if request.user.is_authenticated %}

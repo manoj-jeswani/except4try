@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+    {% block title %}
+
+Query-Detail
+    {% endblock %}
+        <!-- Write code -->
+        {% block include_css %}
+
+
+        {% endblock %}
+
+
+<!--  
+votes  
+    updated
+    user
+
+
+
+    
+    ans_list
+ -->
+
+{% block content %}
+
+
+
+
+
+
+
+<div class="container"  style="margin-top: 20px; margin-bottom: 80px">
+<div class="row">
+    <div class="col-md-9">
+        
+        <h2 class="lat-post-heading">
+                                   {{ qobj.topic }} 
+             
+        </h2>
+        
+
+        <div id="postlist">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="text-center">
+
+                <div class="" style="word-break: break-all; word-wrap: break-word;">
+                    <p class="lat-post-content" style="word-break: break-all; white-space: normal;">
+                        {{ qobj.detail|linebreaks }} 
+                    </p>
+                </div>
+
+                    </div>
+                </div>
+
+                                     <div calss="">
+                                        <p></p>
+                    <span class="label label-default pull-left">
+                        <big id="qvcount">{{ qobj.votes }}</big> votes 
+</span><u><a href="#!" onclick="vote(1,{{qobj.id}},1,-1)" >Upvote</a></u> | <u><a href="#!" onclick="vote(1,{{qobj.id}},0,-1)" >Downvote</a>
+</u>
+<p></p>
+<span class="label label-default pull-left"">
+                    
+                        {{ qobj.ans_list.count }} answers
+                    
+                    </span><u><a href="#" >Want to answer?</a></u>
+</div>
+
+                        <div class="row">
+                            
+                            <div class="col-md-5">
+                                <h4 class="pull-right" style="text-align: left;">
+                                    {% for i in qobj.tag_list.all %}
+                                        <small>    {{i.tag}} |   </small>
+
+                                            {% endfor %}
+                                   
+                                </h4>
+                            </div>
+
+                            <div class="col-md-5">
+                                <h4 class="pull-right" style="text-align: left;">
+                                    
+                                        <small>edited {{ qobj.updated|timesince }} ago
+       </small>
+
+                                   
+                                </h4>
+                            </div>
+
+                        </div>
+
+
+
+
+                <div calss="panel-footer">
+                    <span class="label label-default">
+                        asked {{ qobj.timestamp|timesince }} ago
+                    </span>
+
+                                <span class="pull-right" style="text-align: left;">
+                                    <small>- {{qobj.user.username}}</small>
+                                   
+                                </span>
+                </div>
+            </div>
+       
+    </div>
+</div>
+
+
+
+
+
+    <div class="col-md-9">
+        
+        <h2 class="lat-post-heading">
+                                   Answers 
+             
+        </h2>
+
+<blockquote>-- You can either upvote or downvote the content. In order to upvote a content you must withdraw your previous downvote from that content and vice versa.</blockquote>
+        <hr>
+        <hr>
+{% for m in qobj.ans_list.all %}
+        <div id="postlist">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="text-center">
+
+                <div class="" style="word-break: break-all; word-wrap: break-word;">
+                    <p class="lat-post-content" style="word-break: break-all; white-space: normal;">
+                        {{ m.detail|linebreaks }} 
+                    </p>
+                </div>
+
+                    </div>
+                </div>
+
+                                     <div calss="">
+                                        <p></p>
+                    <span class="label label-default pull-left">
+                        <big id="avcount{{forloop.counter}}">{{ m.votes }}</big> votes 
+</span><u><a href="#!" onclick="vote(0,{{m.id}},1,{{forloop.counter}})" >Upvote</a></u> | <u><a href="#!" onclick="vote(0,{{m.id}},0,{{forloop.counter}})" >Downvote</a>
+</u>
+</div>
+
+                        <div class="row">
+                            
+                            <div class="col-md-5">
+                                <h4 class="pull-right" style="text-align: left;">
+                                    
+                                        <small>edited {{ m.updated|timesince }} ago
+       </small>
+
+                                   
+                                </h4>
+                            </div>
+
+                        </div>
+
+
+
+
+                <div calss="panel-footer">
+                    <span class="label label-default">
+                        answered {{ m.timestamp|timesince }} ago
+                    </span>
+
+                                <span class="pull-right" style="text-align: left;">
+                                    <small>- {{m.user.username}}</small>
+                                   
+                                </span>
+                </div>
+            </div>
+       
+    </div>
+
+
+{% endfor %}
+</div>
+
+
+
+
+
+</div>
+    
+
+</div>
+
+{% endblock %}
+{% block includes %}
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+<script type="application/javascript" charset="utf-8">
+
+    function vote(is_q,id,is_up,cnt) {
+    $.ajax({
+        url : "{% url 'qa:vote' %}", // the endpoint
+        content_type: 'application/json; charset=utf-8',
+        type : "POST", // http method
+        data :{
+            'is_q':is_q,
+            'id':id,
+            'is_up':is_up
+        },
+
+        success : function(server_response) {
+            if (server_response && server_response['done'])
+            {
+                    console.log("successfully voted");
+                    console.log(server_response['new_votes']);
+                    if(is_q==1)
+                        document.getElementById("qvcount").innerHTML =server_response['new_votes'] ;
+                    else if(is_q==0)
+                        var st="avcount"+cnt;
+                        document.getElementById(st).innerHTML =server_response['new_votes'] ;
+
+            }
+            else if (server_response && !server_response['done'])
+            {
+                alert(server_response['msg']);
+
+            }
+            
+            else if(!server_response)
+            {
+                console.log("error in voting"); // another sanity check
+            }
+        },
+        error : function(server_response) {
+                console.log('ajax request unsuccessful');
+        }
+    });
+}
+
+</script>
+{% endblock %}

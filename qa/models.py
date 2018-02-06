@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import Euser
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -20,7 +21,9 @@ class Qabase(models.Model):
 	timestamp = models.DateTimeField(auto_now_add=True)
 	updated=models.DateTimeField(auto_now=True)
 	user=models.ForeignKey(Euser,on_delete=models.CASCADE)
-
+	upvoters=models.ManyToManyField(Euser, related_name='upvoters_list',blank=True)
+	downvoters=models.ManyToManyField(Euser, related_name='downvoters_list',blank=True)
+	
 
 class Answer(Qabase):
 
@@ -41,7 +44,10 @@ class Question(Qabase):
 
 	class Meta:
 		verbose_name = 'Question'
+		ordering=['-timestamp']
 
 	def __str__(self):
 		return self.topic
 
+	def get_absolute_url(self):
+		return reverse("qa:qdetail",kwargs={"id":self.id})
