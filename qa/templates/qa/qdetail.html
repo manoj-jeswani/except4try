@@ -23,7 +23,7 @@ votes
 
 {% block content %}
 
-
+{% load qa_custom_tags %}
 
 
 
@@ -108,19 +108,27 @@ votes
        
     </div>
 </div>
+<!-- 
 
+parentcnt : used to avoid clash between ids of  equipositional comments in each answer
+is_cq : is comment of question : boolean
+pid : parent id : (question or answer ) id under which this comment is done
+ -->
 
-
-
-
-    <div class="col-md-9">
+<p class=" pull-right col-md-3 col-sm-3 col-lg-3"><big>-- You can either upvote or downvote the content.<br><br> In order to upvote a content you must withdraw your previous downvote from  that content and vice versa.</big></p>
+    <div class="col-md-7" style="float: center">
         
-        <h2 class="lat-post-heading">
+{% include 'comment/comment_template.html' with cqset=cqset parentcnt=-1 form=form is_cq=1 pid=qobj.id %}
+
+</div>
+
+    <div class="col-md-9 col-lg-9 col-sm-9">
+        
+        <h1 class="lat-post-heading">
                                    Answers 
              
-        </h2>
+        </h1>
 
-<blockquote>-- You can either upvote or downvote the content. In order to upvote a content you must withdraw your previous downvote from that content and vice versa.</blockquote>
         <hr>
         <hr>
 {% for m in qobj.ans_list.all %}
@@ -177,7 +185,10 @@ votes
        
     </div>
 
+{% include 'comment/comment_template.html' with cqset=m|getCommentSet parentcnt=forloop.counter form=form is_cq=0 pid=m.id  %}
 
+<hr>
+<hr>
 {% endfor %}
 </div>
 
@@ -220,8 +231,13 @@ votes
                     if(is_q==1)
                         document.getElementById("qvcount").innerHTML =server_response['new_votes'] ;
                     else if(is_q==0)
-                        var st="avcount"+cnt;
+                      {  var st="avcount"+cnt;
                         document.getElementById(st).innerHTML =server_response['new_votes'] ;
+                    }
+                    else if(is_q==2)
+                     {   var st="cvcount"+cnt;
+                        document.getElementById(st).innerHTML =server_response['new_votes'] ;
+                    }
 
             }
             else if (server_response && !server_response['done'])

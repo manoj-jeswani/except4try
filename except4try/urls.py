@@ -25,5 +25,6 @@ urlpatterns = [
     url(r'^user/', include('users.urls',namespace='users')),
     url(r'^qa/', include('qa.urls',namespace='qa')),
     url(r'^search/', include('haystack.urls')),
-   
+    url(r'^add_comment/', include('comment.urls',namespace='comment')),
+    
 ]

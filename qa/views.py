@@ -5,6 +5,8 @@ from .models import Question,Answer
 from users.models import Euser
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
+from comment.models import Comment
+from comment.forms import CommentForm
 
 
 import json
@@ -68,6 +70,7 @@ def ansView(request,id=None):
 def qView(request):
 	qset=Question.objects.all()
 
+
 	return render(request, "qa/qlist.html",{"qset" : qset,})
 
 
@@ -77,8 +80,10 @@ def qdetailView(request,id=None):
 	
 	qobj=get_object_or_404(Question,id=id)
 
+	cqset=Comment.objects.filter(que=qobj)
+	form=CommentForm()
 
-	return render(request, "qa/qdetail.html",{"qobj" : qobj,})
+	return render(request, "qa/qdetail.html",{"qobj" : qobj,"cqset":cqset,"form":form})
 
 
 
@@ -95,10 +100,13 @@ def voteView(request):
 			is_q=int(request.POST['is_q'])
 			id=int(request.POST['id'])
 			is_up=int(request.POST['is_up'])
-			if is_q:
+			if is_q==1:
 				obj=Question.objects.get(id=id)
-			else:
-				obj=Answer.objects.get(id=id)			
+			elif is_q==0:
+				obj=Answer.objects.get(id=id)
+			elif is_q==2:
+				obj=Comment.objects.get(id=id)
+
 
 			if obj.user.username==request.user.username:
 				data={'new_votes':None,'done':False,'msg':"You can't vote your own content!"}

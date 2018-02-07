@@ -70,6 +70,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+        'libraries':{
+            'qa_custom_tags': 'qa.templatetags.qa_custom_tags',
+
+            }
         },
     },
 ]
