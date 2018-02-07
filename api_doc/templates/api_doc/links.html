@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title%}
+
+Links - API
+
+{% endblock %}
+
+{% block css %} 
+
+
+{% endblock %}
+
+{% block content %} 
+<div class="container">
+<h1>Links</h1>
+<hr>
+<p>&nbsp;</p>
+
+<h3><b>API end points :</b></h3>
+
+<ul align="left">
+<u>
+<li ><a href="#1l">/api/all_questions</a></li>
+<li ><a href="#2l">/api/answers/&ltqid&gt</a></li>
+<li ><a href="#3l">/api/ask_question/</a></li>
+</u>
+</ul>
+<p>&nbsp;</p>
+
+
+<blockquote id="1l">
+
+
+<p><big><b>/api/all_questions</b></big></p>
+<p >Get all the questions available on site.</p>
+<p></p>
+<p><b>Parameters</b></p>
+None
+
+<p></p>
+
+<p ><b>Return Values</b></p>
+
+	<ul align="left">
+
+<li >
+List of all questions, along with their attributes like votes, tags, upvoters_list, asked_at, etc.
+</li>
+
+</ul>
+
+<p></p>
+
+<p><b>Example Request</b></p>
+<pre class="language-markup"><code style="box-sizing: border-box; background-color: #f9f9f9; border-radius: 3px; color: #666666; border: 1px solid #c6c6c6; padding: 0px 3px; display: inline-block; font-size: 14px; background-clip: padding-box; padding-left: 2%; padding-right: 2%">
+import requests
+
+url="http://127.0.0.1:8000/api/all_questions"
+r = requests.get(url)
+print(r.json())
+
+</code></pre>
+<p></p>
+<p><b>Output</b></p>
+
+<pre class="language-markup"><code style="box-sizing: border-box; background-color: #f9f9f9; border-radius: 3px; color: #666666; border: 1px solid #c6c6c6; padding: 0px 3px; display: inline-block; font-size: 14px; background-clip: padding-box; padding-left: 2%; padding-right: 2%">
+[{'asked_by': 'jesin', 'edited_at': '2018-02-07 21:00:55.717185+00:00', 'tags': "['Python', 'Django', 'Nginx']", 'downvoters_list': '[]', 'topic': 'Configuration Issue', 'detail': 'Nginx configuration files issue in ini file', 'upvoters_list': '["mj"]', 'ans_count': '0', 'vote_count': '1', 'asked_at': '2018-02-07 21:00:55.301851+00:00'}, {'asked_by': 'jesin', 'edited_at': '2018-02-07 20:59:21.241704+00:00', 'tags': "['Python', 'Django', 'Nginx', 'Java']", 'downvoters_list': '["mj"]', 'topic': 'ABC', 'detail': 'XYZ', 'upvoters_list': '[]', 'ans_count': '0', 'vote_count': '-1', 'asked_at': '2018-02-07 20:59:20.486919+00:00'}]
+</code></pre> 
+
+
+</blockquote>
+
+
+
+<p>&nbsp;</p>
+
+
+
+<blockquote id="2l">
+
+
+<p><big><b>/api/answers/&ltqid&gt</b></big></p>
+<p >Given the question id in form of &ltqid&gt :: Retrieves all the answers of the question.</p>
+<p></p>
+<p><b>Parameters</b></p>
+None
+
+<p></p>
+
+<p ><b>Return Values</b></p>
+
+	<ul align="left">
+
+<li>
+List of all the answers corresponding to the given question, along with their attributes like votes, upvoters_list, answered_at, answered_by, etc.
+</li>
+
+</ul>
+
+<p></p>
+
+<p><b>Example Request</b></p>
+<pre class="language-markup"><code style="box-sizing: border-box; background-color: #f9f9f9; border-radius: 3px; color: #666666; border: 1px solid #c6c6c6; padding: 0px 3px; display: inline-block; font-size: 14px; background-clip: padding-box; padding-left: 2%; padding-right: 2%">
+import requests
+
+url="http://127.0.0.1:8000/api/answers/4"
+r = requests.get(url)
+print(r.json())
+
+</code></pre>
+<p></p>
+<p><b>Output</b></p>
+
+<pre class="language-markup"><code style="box-sizing: border-box; background-color: #f9f9f9; border-radius: 3px; color: #666666; border: 1px solid #c6c6c6; padding: 0px 3px; display: inline-block; font-size: 14px; background-clip: padding-box; padding-left: 2%; padding-right: 2%">
+[{'answered_by': 'vyrucufado', 'downvoters_list': '[]', 'answered_at': '2018-02-07 06:28:00.588557+00:00', 'detail': 'Et fugiat repellendus Qui quia accusantium labore architecto reiciendis enim quas dolorem nihil', 'votes': 1, 'edited_at': '2018-02-07 17:40:47.853389+00:00', 'upvoters_list': "['jesin']"},{'answered_by': 'jesin', 'downvoters_list': '[]', 'answered_at': '2018-02-07 06:28:00.588557+00:00', 'detail': 'Et fugiat repellendus Qui quia accusantium labore architecto reiciendis enim quas dolorem nihil', 'votes': 1, 'edited_at': '2018-02-07 17:40:47.853389+00:00', 'upvoters_list': "['foo']"}]
+
+</code></pre> 
+
+
+</blockquote>
+
+
+
+<p>&nbsp;</p>
+
+
+
+
+<blockquote id="3l">
+<p><big><b>/api/ask_question/</b></big></p>
+<p>Post request to ask a question programatically.</p>
+<p></p>
+<p><b>Parameters</b></p>
+
+<ul align="left">
+<li >topic: topic of question.</li>
+<li >detail: description of question.</li>
+<li >tags_list: list of strings indicating the categories under which the question falls.</li>
+
+
+</ul>
+
+<p></p>
+
+<p ><b>Return Values</b></p>
+
+	<ul align="left">
+
+<li>
+Posts the question and returns it's echo to indicate successful post.
+</li>
+
+</ul>
+
+<p></p>
+
+<p><b>Example Request</b></p>
+<pre class="language-markup"><code style="box-sizing: border-box; background-color: #f9f9f9; border-radius: 3px; color: #666666; border: 1px solid #c6c6c6; padding: 0px 3px; display: inline-block; font-size: 14px; background-clip: padding-box; padding-left: 2%; padding-right: 2%">
+import requests
+
+url="http://127.0.0.1:8000/api/ask_question/"
+data={'topic':'Template filters in Django','detail':'library not found error being displayed','tags_list':['Python','Django']}
+r = requests.post(url,auth=('username', 'password'),data=data)
+print(r.json())
+
+</code></pre>
+<p></p>
+<p><b>Output</b></p>
+
+<pre class="language-markup"><code style="box-sizing: border-box; background-color: #f9f9f9; border-radius: 3px; color: #666666; border: 1px solid #c6c6c6; padding: 0px 3px; display: inline-block; font-size: 14px; background-clip: padding-box; padding-left: 2%; padding-right: 2%">
+{'topic': 'Template filters in Django', 'asked_at': '2018-02-07 22:28:39.246626+00:00', 'detail': 'library not found error being displayed', 'ans_count': '0', 'vote_count': '0', 'asked_by': 'jesin', 'downvoters_list': '[]', 'edited_at': '2018-02-07 22:28:40.149666+00:00', 'upvoters_list': '[]', 'tags': "['Python', 'Django']"}
+
+</code></pre> 
+
+
+</blockquote>
+
+
+
+<p>&nbsp;</p>
+
+
+
+</div>
+
+{% endblock %}
+
+
+{% block include_scripts %}
+  
+{% endblock %}

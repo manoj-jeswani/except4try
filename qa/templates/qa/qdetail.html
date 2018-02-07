@@ -100,7 +100,7 @@ votes
                     </span>
 
                                 <span class="pull-right" style="text-align: left;">
-                                    <small>- {{qobj.user.username}}</small>
+                                    <small>- <a href="{{qobj.user.get_absolute_url}}">{{qobj.user.username}}</a></small>
                                    
                                 </span>
                 </div>
@@ -177,7 +177,7 @@ pid : parent id : (question or answer ) id under which this comment is done
                     </span>
 
                                 <span class="pull-right" style="text-align: left;">
-                                    <small>- {{m.user.username}}</small>
+                                    <small>- <a href="{{m.user.get_absolute_url}}">{{m.user.username}}</a></small>
                                    
                                 </span>
                 </div>

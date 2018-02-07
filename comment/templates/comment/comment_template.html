@@ -12,7 +12,7 @@
 <p></p>
 <span class="pull-right">| {{cobj.timestamp|timesince }} ago</span>
 
-<span class="pull-right">- {{cobj.user.username}} | </span>
+<span class="pull-right">- <a href="{{cobj.user.get_absolute_url}}">{{cobj.user.username}}</a> | </span>
 <span class="label label-default pull-left">
 <big id="cvcount{{parentcnt}}{{forloop.counter}}">{{cobj.votes}}</big> votes 
  </span> <u><a href="#!" onclick="vote(2,{{cobj.id}},1,{{parentcnt}}{{forloop.counter}})" >Upvote</a></u> | <u><a href="#!" onclick="vote(2,{{cobj.id}},0,{{parentcnt}}{{forloop.counter}})" >Downvote</a>

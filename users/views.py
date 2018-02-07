@@ -40,3 +40,15 @@ def login(request, **kwargs):
         return redirect('/')
     else:
         return auth_views.login(request, **kwargs)
+
+
+def profileView(request,id=None):
+	uobj=get_object_or_404(Euser,id=id)
+	return render(request, "users/profile.html",{"uobj" : uobj,})
+
+
+
+def allUsersView(request):
+	uqset=Euser.objects.all()
+	return render(request, "users/ulist.html",{"uqset" : uqset,})
+ 

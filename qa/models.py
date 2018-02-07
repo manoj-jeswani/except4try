@@ -37,6 +37,24 @@ class Answer(Qabase):
 	def __str__(self):
 		return self.user.username + " : " + self.detail
 
+	def get_uname(self):
+		return self.user.username
+
+	def get_upvoters(self):
+		qset=self.upvoters.all()
+		res=[]
+		for uobj in qset:
+			res.append(uobj.username)
+
+		return res		
+
+	def get_downvoters(self):
+		qset=self.downvoters.all()
+		res=[]
+		for uobj in qset:
+			res.append(uobj.username)
+
+		return res		
 
 
 class Question(Qabase):
@@ -55,3 +73,34 @@ class Question(Qabase):
 
 	def get_absolute_url(self):
 		return reverse("qa:qdetail",kwargs={"id":self.id})
+	
+	def get_uname(self):
+		return self.user.username
+
+
+	def get_upvoters(self):
+		qset=self.upvoters.all()
+		res=[]
+		for uobj in qset:
+			res.append(uobj.username)
+
+		return res		
+
+	def get_downvoters(self):
+		qset=self.downvoters.all()
+		res=[]
+		for uobj in qset:
+			res.append(uobj.username)
+
+		return res		
+
+	def get_ans_count(self):
+		return self.ans_list.count()
+	
+	def get_tag_list(self):
+		qset=self.tag_list.all()
+		res=[]
+		for cobj in qset:
+			res.append(cobj.tag)
+		return res
+	

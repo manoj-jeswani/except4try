@@ -26,5 +26,8 @@ urlpatterns = [
     url(r'^qa/', include('qa.urls',namespace='qa')),
     url(r'^search/', include('haystack.urls')),
     url(r'^add_comment/', include('comment.urls',namespace='comment')),
+    url(r'^api/', include('qa.api.urls',namespace='qa-api')),
+    url(r'^api-docs/', include('api_doc.urls',namespace='api_doc')),
+
     
 ]

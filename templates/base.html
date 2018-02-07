@@ -33,13 +33,14 @@
                         <ul class="nav navbar-nav">
                             <li><a href="{% url 'qa:questions' %}">Questions</a></li>
                             <li><a href="{% url 'home:tags' %}">Tags</a></li>
-                           <li><a href="#">Users</a></li>
+                           <li><a href="{% url 'users:all' %}">Users</a></li>
                            <li><a href="/search">Search Query</a></li>
+                           <li><a href="{% url 'api_doc:api-doc-links' %}">Api docs</a></li>
                            
                            {% if request.user.is_authenticated %}
                             <li><a href="{% url 'qa:ask' %}">Ask</a></li>
                            
-                            <li><a href="#">Profile</a></li>
+                            <li><a href="{% url 'users:profile' request.user.id %}">Profile</a></li>
                            <li><a href="{% url 'users:logout' %}">Logout</a></li>
                           
                            {% else %}
@@ -67,7 +68,7 @@
             <div class="container">
                <p class="text-muted" align="center"> Brought to you by <a href="https://www.linkedin.com/in/manoj-jeswani">except4try::Manoj</a>
                 <br/>
-                Give <a href="#">feedback.</a></p>
+              <!--   Give <a href="#">feedback.</a> --></p>
             </div>
          </footer>
          </div>

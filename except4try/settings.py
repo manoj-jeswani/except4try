@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'comment',
     'crispy_forms',
     'haystack',
+    'rest_framework',
+    'api_doc',
 ]
 
 MIDDLEWARE = [
