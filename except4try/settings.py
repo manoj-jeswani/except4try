@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'users',
     'qa',
     'comment',
-    'crispy_forms'
+    'crispy_forms',
+    'haystack',
 ]
 
 MIDDLEWARE = [
@@ -104,6 +105,14 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'products',
+    },
+}
 
 
 # Internationalization
