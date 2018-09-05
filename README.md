@@ -15,7 +15,7 @@
 
 
 
-<b><h3>Live demo Link: <a href="http://165.227.181.182/">http://165.227.181.182/ </a></h3><b> 
+<b><h3>Live demo Link: <a href="http://except4try.pythonanywhere.com/">http://except4try.pythonanywhere.com/ </a></h3><b> 
 <b>
 <hr>
 
@@ -45,7 +45,7 @@
 <pre>
 import requests
 
-url="http://165.227.181.182/api/ask_question/"
+url="http://except4try.pythonanywhere.com/api/ask_question/"
 data={'topic':'Template custom filters in Django','detail':'library not found error being displayed','tags_list':['Python','Django']}
 r = requests.post(url,auth=('jesin', 'jesin'),data=data)
 print(r.json())
@@ -58,7 +58,7 @@ print(r.json())
 
 import requests
 
-url="http://165.227.181.182/api/all_questions/"
+url="http://except4try.pythonanywhere.com/api/all_questions/"
 r = requests.get(url)
 print(r.json())
 
@@ -69,7 +69,7 @@ print(r.json())
 <pre>
 import requests
 
-url="http://165.227.181.182/api/answers/2"
+url="http://except4try.pythonanywhere.com/api/answers/2"
 r = requests.get(url)
 print(r.json())
 </pre>
